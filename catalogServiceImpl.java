@@ -3,6 +3,7 @@ package com.cts.LibraryManagementSystem.service;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,14 +47,28 @@ public class CatalogServiceImpl implements CatalogService {
 	        return true;
 	}
 
+//	@Override
+//	public CatalogModel updateBookById(int bookId, CatalogDTO catalogDTO) {
+//		CatalogModel catalogModel=catalogRepo.findById(bookId);
+//		
+//		catalogModel.builder().bookName(catalogDTO.getBookName() !=null ? catalogDTO.getBookName() : catalogModel.getBookName())
+//		.bookAuthor(catalogDTO.getBookAuthor() !=null ? catalogDTO.getBookAuthor() : catalogModel.getBookName())
+//		.bookGenre(catalogDTO.getBookGenre() !=null? catalogDTO.getBookGenre() : catalogModel.getBookGenre())
+////		.availabilityStatus //dought
+////		.createdAt(catalogModel.setCreatedAt(null))
+//		.updatedAt(new Timestamp(new Date(System.currentTimeMillis()).getTime()))
+//		.build();
+//		return catalogRepo.save(cat)
+//	}
+
 	@Override
-	public CatalogModel getBookById(int bookId) {
-		return catalogRepo.findById(bookId);	
+	public List<CatalogModel> getBooksByName(String bookName) {
+		return catalogRepo.findByBookName(bookName);
 	}
 
 	@Override
-	public void getBookByName(String bookName) {
-		catalogRepo.findByBookName(bookName);
+	public Optional<CatalogModel>getBookById(int bookId) {
+		return catalogRepo.findById(bookId);
 	}
 
 	@Override
@@ -61,19 +76,4 @@ public class CatalogServiceImpl implements CatalogService {
 		return catalogRepo.findByBookGenre(bookGenre);
 	}
 
-  Update
-	// @Override
-	// public CatalogModel updateBookById(int bookId, CatalogDTO catalogDTO) {
-	// 	CatalogModel catalogModel=catalogRepo.findById(bookId);
-		
-	// 	catalogModel.builder().bookName(catalogDTO.getBookName() !=null ? catalogDTO.getBookName() : catalogModel.getBookName())
-	// 	.bookAuthor(catalogDTO.getBookAuthor() !=null ? catalogDTO.getBookAuthor() : catalogModel.getBookName())
-	// 	.bookGenre(catalogDTO.getBookGenre() !=null? catalogDTO.getBookGenre() : catalogModel.getBookGenre())
-	// 	//.availabilityStatus //dought
-	// 	//.createdAt(catalogModel.setCreatedAt(null))
-	// 	.updatedAt(new Timestamp(new Date(System.currentTimeMillis()).getTime()))
-	// 	.build();
-	// 	return catalogRepo.save(catalogModel);
-	}
-	
 }
