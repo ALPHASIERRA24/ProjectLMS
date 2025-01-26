@@ -1,6 +1,7 @@
 package com.cts.LibraryManagementSystem.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,13 +49,13 @@ public class CatalogController {
 	
 
 	@GetMapping("/name/{bookGenre}")
-	public void getBookByName(@PathVariable String bookGenre) {
-		catalogService.getBookByName(bookGenre);
+	public List<CatalogModel> getBookByName(@PathVariable String bookGenre){
+		return catalogService.getBooksByName(bookGenre);
 	}
 	
 	@GetMapping("/id/{bookId}")
-	public void getBookById(@PathVariable Integer bookId) {
-		catalogService.getBookById(bookId);
+	public Optional<CatalogModel> getBookById(@PathVariable int bookId) {
+		return catalogService.getBookById(bookId);
 	}
 	
 	
