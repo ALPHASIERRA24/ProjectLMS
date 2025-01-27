@@ -47,19 +47,20 @@ public class CatalogServiceImpl implements CatalogService {
 	        return true;
 	}
 
-//	@Override
-//	public CatalogModel updateBookById(int bookId, CatalogDTO catalogDTO) {
-//		CatalogModel catalogModel=catalogRepo.findById(bookId);
-//		
-//		catalogModel.builder().bookName(catalogDTO.getBookName() !=null ? catalogDTO.getBookName() : catalogModel.getBookName())
-//		.bookAuthor(catalogDTO.getBookAuthor() !=null ? catalogDTO.getBookAuthor() : catalogModel.getBookName())
-//		.bookGenre(catalogDTO.getBookGenre() !=null? catalogDTO.getBookGenre() : catalogModel.getBookGenre())
-////		.availabilityStatus //dought
-////		.createdAt(catalogModel.setCreatedAt(null))
-//		.updatedAt(new Timestamp(new Date(System.currentTimeMillis()).getTime()))
-//		.build();
-//		return catalogRepo.save(cat)
-//	}
+
+	//check the logic once its not working in postman
+	@Override
+	public CatalogModel updateBookById(int bookId, CatalogDTO catalogDTO) {
+		CatalogModel catalogModel=catalogRepo.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+		
+		  catalogModel.setBookName(catalogDTO.getBookName() != null ? catalogDTO.getBookName() : catalogModel.getBookName());
+		    catalogModel.setBookAuthor(catalogDTO.getBookAuthor() != null ? catalogDTO.getBookAuthor() : catalogModel.getBookAuthor());
+		    catalogModel.setBookGenre(catalogDTO.getBookGenre() != null ? catalogDTO.getBookGenre() : catalogModel.getBookGenre());
+		    catalogModel.setAvailabilityStatus(catalogDTO.isAvailabilityStatus());
+		    catalogModel.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+
+		return catalogRepo.save(catalogModel);
+	}
 
 	@Override
 	public List<CatalogModel> getBooksByName(String bookName) {
