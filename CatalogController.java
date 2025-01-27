@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cts.LibraryManagementSystem.dto.CatalogDTO;
 import com.cts.LibraryManagementSystem.model.CatalogModel;
 import com.cts.LibraryManagementSystem.service.CatalogService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping("/books")
@@ -64,6 +66,9 @@ public class CatalogController {
 		return catalogService.getBooksByGenre(bookGenre);
 	}
 	
-	
+	@PutMapping("/update/{bookId}")
+	public CatalogModel updateBookById(@PathVariable int bookId,CatalogDTO catalogDTO) {
+		return catalogService.updateBookById(bookId, catalogDTO);
+	}
 	
 }
