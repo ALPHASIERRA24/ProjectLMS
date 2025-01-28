@@ -45,8 +45,7 @@ public class CatalogController {
 			return ResponseEntity.ok("Book Deleted SuccessFully.");
 		}else {
 			return ResponseEntity.status(404).body("Book not found.");
-		}
-			
+		}	
 	}
 	
 
@@ -67,7 +66,7 @@ public class CatalogController {
 	}
 	
 	@PutMapping("/update/{bookId}")
-	public CatalogModel updateBookById(@PathVariable int bookId,CatalogDTO catalogDTO) {
+	public CatalogModel updateBookById(@PathVariable int bookId,@RequestBody CatalogDTO catalogDTO) {
 		return catalogService.updateBookById(bookId, catalogDTO);
 	}
 	
