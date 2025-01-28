@@ -48,7 +48,7 @@ public class CatalogServiceImpl implements CatalogService {
 	}
 
 
-	//check the logic once its not working in postman
+	
 	@Override
 	public CatalogModel updateBookById(int bookId, CatalogDTO catalogDTO) {
 		CatalogModel catalogModel=catalogRepo.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
