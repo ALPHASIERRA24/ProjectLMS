@@ -30,7 +30,7 @@ public class CatalogServiceImpl implements CatalogService {
 				.bookName(addCatalogDTO.getBookName())
 				.bookAuthor(addCatalogDTO.getBookAuthor())
 				.bookGenre(addCatalogDTO.getBookGenre())
-				.availabilityStatus(addCatalogDTO.isAvailabilityStatus())
+				.availabilityStatus(addCatalogDTO.getAvailabilityStatus())
 				.createdAt(new Timestamp(new Date(System.currentTimeMillis()).getTime()))
 				.updatedAt(new Timestamp(new Date(System.currentTimeMillis()).getTime()))
 				.build();
@@ -47,17 +47,18 @@ public class CatalogServiceImpl implements CatalogService {
 	        return true;
 	}
 
-
-	
 	@Override
 	public CatalogModel updateBookById(int bookId, CatalogDTO catalogDTO) {
 		CatalogModel catalogModel=catalogRepo.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+		System.out.println(catalogModel);
 		
-		  catalogModel.setBookName(catalogDTO.getBookName() != null ? catalogDTO.getBookName() : catalogModel.getBookName());
-		    catalogModel.setBookAuthor(catalogDTO.getBookAuthor() != null ? catalogDTO.getBookAuthor() : catalogModel.getBookAuthor());
-		    catalogModel.setBookGenre(catalogDTO.getBookGenre() != null ? catalogDTO.getBookGenre() : catalogModel.getBookGenre());
-		    catalogModel.setAvailabilityStatus(catalogDTO.isAvailabilityStatus());
-		    catalogModel.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+		catalogModel.setBookName(catalogDTO.getBookName() != null ? catalogDTO.getBookName() : catalogModel.getBookName());
+	    catalogModel.setBookAuthor(catalogDTO.getBookAuthor() != null ? catalogDTO.getBookAuthor() : catalogModel.getBookAuthor());
+	    catalogModel.setBookGenre(catalogDTO.getBookGenre() != null ? catalogDTO.getBookGenre() : catalogModel.getBookGenre());
+	    catalogModel.setAvailabilityStatus(catalogDTO.getAvailabilityStatus());
+	    catalogModel.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+		    
+		    System.out.println(catalogModel);
 
 		return catalogRepo.save(catalogModel);
 	}
@@ -75,6 +76,11 @@ public class CatalogServiceImpl implements CatalogService {
 	@Override
 	public List<CatalogModel> getBooksByGenre(String bookGenre) {
 		return catalogRepo.findByBookGenre(bookGenre);
+	}
+	
+	public void updateAvailabilityStatus(CatalogModel catalogModel) {
+		catalogRepo.save(catalogModel);
+		
 	}
 
 }
