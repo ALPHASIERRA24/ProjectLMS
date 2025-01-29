@@ -3,9 +3,12 @@ package com.cts.LibraryManagementSystem.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.cts.LibraryManagementSystem.dto.CatalogDTO;
 import com.cts.LibraryManagementSystem.model.CatalogModel;
 
+@Service
 public interface CatalogService {
 
 	public List<CatalogModel> getAllBooks();
@@ -21,6 +24,8 @@ public interface CatalogService {
 	public List<CatalogModel> getBooksByGenre(String bookGenre);
 
 	CatalogModel updateBookById(int bookId, CatalogDTO catalogDTO);
+	
+	public void updateAvailabilityStatus(CatalogModel catalogModel);
 	
 	
 }
