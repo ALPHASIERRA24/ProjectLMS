@@ -49,9 +49,9 @@ public class CatalogController {
 	}
 	
 
-	@GetMapping("/name/{bookGenre}")
-	public List<CatalogModel> getBookByName(@PathVariable String bookGenre){
-		return catalogService.getBooksByName(bookGenre);
+	@GetMapping("/name/{bookName}")
+	public List<CatalogModel> getBookByName(@PathVariable String bookName){
+		return catalogService.getBooksByName(bookName);
 	}
 	
 	@GetMapping("/id/{bookId}")
